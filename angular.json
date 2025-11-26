@@ -49,7 +49,13 @@
               "sourceMap": false,
               "extractLicenses": true,
               "namedChunks": false,
-              "aot": true
+              "aot": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
