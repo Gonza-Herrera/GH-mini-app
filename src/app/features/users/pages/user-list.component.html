@@ -1,0 +1,100 @@
+<section class="container" role="main" aria-label="Listado de usuarios">
+  <header class="toolbar">
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar por nombre o email</mat-label>
+      <input
+        matInput
+        (input)="store.setQuery($any($event.target).value)"
+        placeholder="Ej: Karley o @karina.biz"
+        [disabled]="!!store.error()"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Compañía</mat-label>
+      <mat-select
+        [value]="store.company()"
+        (valueChange)="store.setCompany($event)"
+        aria-label="Filtrar por compañía"
+        [disabled]="!!store.error()"
+      >
+        <mat-option *ngFor="let c of store.companies()" [value]="c">{{
+          c === 'all' ? 'Todas' : c
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      class="logout-btn"
+      (click)="logout()"
+      aria-label="Cerrar sesión"
+    >
+      Salir
+    </button>
+  </header>
+
+  <div *ngIf="store.loading()" class="state">Cargando usuarios...</div>
+  <div *ngIf="store.error()" class="state state-error">{{ store.error() }}</div>
+  <div
+    *ngIf="!store.loading() && !store.error() && store.filtered().length === 0"
+    class="state state-empty"
+  >
+    No hay usuarios para mostrar. Ajusta la búsqueda o intenta nuevamente.
+  </div>
+
+  <div class="grid" role="list" *ngIf="!store.loading() && !store.error() && store.filtered().length">
+    <app-info-card
+      *ngFor="let u of store.paged(); trackBy: track"
+      [title]="u.name"
+      [items]="[
+        { icon: 'person', text: u.username },
+        { icon: 'email', text: u.email },
+        { icon: 'apartment', text: u.company.name }
+      ]"
+      (selected)="open(u)"
+      [ariaLabel]="'Abrir detalles de ' + u.name"
+      role="listitem"
+    ></app-info-card>
+  </div>
+
+  <footer class="paginator" aria-label="Paginación">
+    <app-basic-paginator
+      [length]="store.filtered().length"
+      [pageIndex]="store.page() - 1"
+      [pageSize]="store.pageSize"
+      [pageSizeOptions]="[store.pageSize]"
+      [disabled]="!!store.error()"
+      (pageChange)="onPage($event)"
+    ></app-basic-paginator>
+  </footer>
+</section>
+
+<app-drawer
+  *ngIf="store.selectedUser() as user"
+  [opened]="true"
+  [title]="user.name"
+  ariaLabel="Detalle de usuario"
+  (closed)="store.closeSidebar()"
+>
+  <div class="drawer-content" tabindex="0">
+    <h3>Información</h3>
+    <p><b>Ciudad:</b> {{ user.address.city }}</p>
+    <p><b>Código Postal:</b> {{ user.address.zipcode }}</p>
+    <p><b>Teléfono:</b> {{ user.phone }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Compañía:</b> {{ user.company.name }}</p>
+    <p><b>Website:</b> {{ user.website }}</p>
+
+    <h3 class="posts-title">Últimas 5 publicaciones</h3>
+    <mat-nav-list class="posts-list">
+      <a mat-list-item *ngFor="let p of store.lastPosts()">
+        <div matListItemTitle>{{ p.title }}</div>
+        <div matListItemLine>{{ p.body }}</div>
+      </a>
+      <div *ngIf="store.lastPostsLoading()" class="state">Cargando publicaciones...</div>
+      <div *ngIf="store.lastPostsError()" class="state state-error">{{ store.lastPostsError() }}</div>
+    </mat-nav-list>
+  </div>
+</app-drawer>

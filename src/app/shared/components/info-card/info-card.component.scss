@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  cursor: pointer;
+  outline: none;
+}
+
+:host(:focus-visible) mat-card {
+  box-shadow: 0 0 0 2px var(--mat-primary);
+}
+
+mat-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  padding: 10px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+mat-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
+}

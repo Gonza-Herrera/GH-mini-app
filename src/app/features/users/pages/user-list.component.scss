@@ -1,0 +1,59 @@
+.container {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.logout-btn {
+  margin-left: auto;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  padding: 0;
+  margin: 0;
+}
+
+.grid app-info-card {
+  list-style: none;
+}
+
+.state {
+  text-align: center;
+  padding: 16px;
+  color: #555;
+}
+
+.state-error {
+  color: #c62828;
+}
+
+.posts-title {
+  margin-top: 2rem;
+}
+
+mat-nav-list.posts-list {
+  padding-left: 0;
+  margin-top: 0px;
+}
+
+.paginator {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.paginator app-basic-paginator {
+  width: auto;
+}
