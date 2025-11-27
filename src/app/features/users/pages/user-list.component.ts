@@ -10,7 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
 import { BasicPaginatorComponent } from '../../../shared/components/basic-paginator/basic-paginator.component';
-import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
+import { InfoCardComponent } from '../components/info-card/info-card.component';
 import { DrawerComponent } from '../../../shared/components/drawer/drawer.component';
 import { User } from '../models/user.model';
 import { AuthService } from '../../../core/services/auth.service';
