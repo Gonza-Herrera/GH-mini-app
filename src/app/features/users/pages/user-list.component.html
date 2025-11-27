@@ -4,7 +4,7 @@
       <mat-label>Buscar por nombre o email</mat-label>
       <input
         matInput
-        (input)="store.query.set($any($event.target).value)"
+        (input)="store.setQuery($any($event.target).value)"
         placeholder="Ej: Karley o @karina.biz"
       />
     </mat-form-field>
@@ -13,7 +13,7 @@
       <mat-label>Compañía</mat-label>
       <mat-select
         [value]="store.company()"
-        (valueChange)="store.company.set($event)"
+        (valueChange)="store.setCompany($event)"
         aria-label="Filtrar por compañía"
       >
         <mat-option *ngFor="let c of store.companies()" [value]="c">{{

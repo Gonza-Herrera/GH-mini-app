@@ -47,6 +47,16 @@ export class UsersStore {
     this.users.set(data);
   }
 
+  setQuery(value: string) {
+    this.query.set(value);
+    this.page.set(1);
+  }
+
+  setCompany(value: string) {
+    this.company.set(value);
+    this.page.set(1);
+  }
+
   async openSidebar(user: User) {
     this.selectedUser.set(user);
     this.lastPosts.set(await firstValueFrom(this.api.lastPostsByUser(user.id)));
