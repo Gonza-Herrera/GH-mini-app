@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { PageEvent } from '@angular/material/paginator';
+import { BasicPaginatorComponent } from '../../../shared/components/basic-paginator/basic-paginator.component';
 
 @Component({
   standalone: true,
@@ -23,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    BasicPaginatorComponent,
   ],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
@@ -41,12 +44,8 @@ export class UserListComponent implements OnInit {
     this.store.openSidebar(u);
   }
 
-  prev() {
-    this.store.page.update((p: number) => Math.max(1, p - 1));
-  }
-
-  next() {
-    this.store.page.update((p: number) => p + 1);
+  onPage(event: PageEvent) {
+    this.store.page.set(event.pageIndex + 1);
   }
   
 }

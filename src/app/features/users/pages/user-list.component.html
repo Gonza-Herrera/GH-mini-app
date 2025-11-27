@@ -40,11 +40,13 @@
   </ul>
 
   <footer class="paginator" aria-label="Paginación">
-    <button mat-stroked-button (click)="prev()" [disabled]="store.page() === 1">Anterior</button>
-    <span>Página {{ store.page() }}</span>
-    <button mat-stroked-button (click)="next()" [disabled]="store.paged().length < store.pageSize">
-      Siguiente
-    </button>
+    <app-basic-paginator
+      [length]="store.filtered().length"
+      [pageIndex]="store.page() - 1"
+      [pageSize]="store.pageSize"
+      [pageSizeOptions]="[store.pageSize]"
+      (pageChange)="onPage($event)"
+    ></app-basic-paginator>
   </footer>
 </section>
 
