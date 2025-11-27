@@ -26,6 +26,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # 3.1. Renombrar ruta para GitHub Pages
+      - name: Deploy to Pages
+        run: mv dist/GH-mini-app/index.html dist/GH-mini-app/404.html
+
       # 4. Compilar el proyecto Angular
       - name: Build Angular app
         run: npm run build -- --base-href="/GH-mini-app/"
