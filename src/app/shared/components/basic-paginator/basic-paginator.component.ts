@@ -17,6 +17,7 @@ export class BasicPaginatorComponent {
   @Input() pageSize = 5;
   @Input() pageSizeOptions: number[] = [5];
   @Input() hidePageSize = true;
+  @Input() disabled = false;
 
   @Output() pageChange = new EventEmitter<PageEvent>();
 

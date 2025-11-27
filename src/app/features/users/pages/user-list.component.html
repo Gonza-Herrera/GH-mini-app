@@ -6,6 +6,7 @@
         matInput
         (input)="store.setQuery($any($event.target).value)"
         placeholder="Ej: Karley o @karina.biz"
+        [disabled]="!!store.error()"
       />
     </mat-form-field>
 
@@ -15,6 +16,7 @@
         [value]="store.company()"
         (valueChange)="store.setCompany($event)"
         aria-label="Filtrar por compañía"
+        [disabled]="!!store.error()"
       >
         <mat-option *ngFor="let c of store.companies()" [value]="c">{{
           c === 'all' ? 'Todas' : c
@@ -23,7 +25,16 @@
     </mat-form-field>
   </header>
 
-  <div class="grid" role="list">
+  <div *ngIf="store.loading()" class="state">Cargando usuarios...</div>
+  <div *ngIf="store.error()" class="state state-error">{{ store.error() }}</div>
+  <div
+    *ngIf="!store.loading() && !store.error() && store.filtered().length === 0"
+    class="state state-empty"
+  >
+    No hay usuarios para mostrar. Ajusta la búsqueda o intenta nuevamente.
+  </div>
+
+  <div class="grid" role="list" *ngIf="!store.loading() && !store.error() && store.filtered().length">
     <app-info-card
       *ngFor="let u of store.paged(); trackBy: track"
       [title]="u.name"
@@ -44,6 +55,7 @@
       [pageIndex]="store.page() - 1"
       [pageSize]="store.pageSize"
       [pageSizeOptions]="[store.pageSize]"
+      [disabled]="!!store.error()"
       (pageChange)="onPage($event)"
     ></app-basic-paginator>
   </footer>

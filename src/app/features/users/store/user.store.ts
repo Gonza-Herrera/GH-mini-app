@@ -14,6 +14,9 @@ export class UsersStore {
   page = signal<number>(1);
   readonly pageSize = 5;
 
+  loading = signal<boolean>(false);
+  error = signal<string | null>(null);
+
   selectedUser = signal<User | null>(null);
   lastPosts = signal<Post[] | null>(null);
 
@@ -43,8 +46,18 @@ export class UsersStore {
   });
 
   async loadUsers() {
-    const data = await firstValueFrom(this.api.listUsers());
-    this.users.set(data);
+    this.loading.set(true);
+    this.error.set(null);
+    try {
+      const data = await firstValueFrom(this.api.listUsers());
+      this.users.set(data);
+    } catch (err) {
+      console.error('Error loading users', err);
+      this.error.set('No pudimos cargar los usuarios. Intenta nuevamente.');
+      this.users.set([]);
+    } finally {
+      this.loading.set(false);
+    }
   }
 
   setQuery(value: string) {
