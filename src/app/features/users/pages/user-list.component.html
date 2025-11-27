@@ -61,42 +61,30 @@
   </footer>
 </section>
 
-<mat-drawer-container class="drawer" *ngIf="store.selectedUser()" [hasBackdrop]="true">
-  <mat-drawer
-    #side
-    mode="over"
-    position="end"
-    [opened]="store.selectedUser() !== null"
-    (closedStart)="store.closeSidebar()"
-    role="dialog"
-    aria-label="Detalle de usuario"
-  >
-    <ng-container *ngIf="store.selectedUser() as user">
-      <header class="drawer-header">
-        <h2 id="user-title">{{ user.name }}</h2>
-        <button mat-icon-button (click)="side.close()" aria-label="Cerrar panel">
-          <mat-icon>close</mat-icon>
-        </button>
-      </header>
-      <div class="drawer-content" tabindex="0" [attr.aria-labelledby]="'user-title'">
-        <h3>Información</h3>
-        <p><b>Ciudad:</b> {{ user.address.city }}</p>
-        <p><b>Código Postal:</b> {{ user.address.zipcode }}</p>
-        <p><b>Teléfono:</b> {{ user.phone }}</p>
-        <p><b>Email:</b> {{ user.email }}</p>
-        <p><b>Compañía:</b> {{ user.company.name }}</p>
-        <p><b>Website:</b> {{ user.website }}</p>
+<app-drawer
+  *ngIf="store.selectedUser() as user"
+  [opened]="true"
+  [title]="user.name"
+  ariaLabel="Detalle de usuario"
+  (closed)="store.closeSidebar()"
+>
+  <div class="drawer-content" tabindex="0">
+    <h3>Información</h3>
+    <p><b>Ciudad:</b> {{ user.address.city }}</p>
+    <p><b>Código Postal:</b> {{ user.address.zipcode }}</p>
+    <p><b>Teléfono:</b> {{ user.phone }}</p>
+    <p><b>Email:</b> {{ user.email }}</p>
+    <p><b>Compañía:</b> {{ user.company.name }}</p>
+    <p><b>Website:</b> {{ user.website }}</p>
 
-        <h3>Últimas 5 publicaciones</h3>
-        <mat-nav-list>
-          <a mat-list-item *ngFor="let p of store.lastPosts()">
-            <div matListItemTitle>{{ p.title }}</div>
-      <div matListItemLine>{{ p.body }}</div>
-    </a>
-    <div *ngIf="store.lastPostsLoading()" class="state">Cargando publicaciones...</div>
-    <div *ngIf="store.lastPostsError()" class="state state-error">{{ store.lastPostsError() }}</div>
-  </mat-nav-list>
-      </div>
-    </ng-container>
-  </mat-drawer>
-</mat-drawer-container>
+    <h3 class="posts-title">Últimas 5 publicaciones</h3>
+    <mat-nav-list class="posts-list">
+      <a mat-list-item *ngFor="let p of store.lastPosts()">
+        <div matListItemTitle>{{ p.title }}</div>
+        <div matListItemLine>{{ p.body }}</div>
+      </a>
+      <div *ngIf="store.lastPostsLoading()" class="state">Cargando publicaciones...</div>
+      <div *ngIf="store.lastPostsError()" class="state state-error">{{ store.lastPostsError() }}</div>
+    </mat-nav-list>
+  </div>
+</app-drawer>

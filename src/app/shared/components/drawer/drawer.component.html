@@ -1,0 +1,22 @@
+<mat-drawer-container class="drawer" [hasBackdrop]="hasBackdrop">
+  <mat-drawer
+    #drawer
+    [mode]="mode"
+    [position]="position"
+    [opened]="opened"
+    (closedStart)="closed.emit()"
+    role="dialog"
+    [attr.aria-label]="ariaLabel"
+  >
+    <header class="drawer-header">
+      <h2 id="drawer-title">{{ title }}</h2>
+      <button mat-icon-button (click)="close()" aria-label="Cerrar panel">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+
+    <div class="drawer-content" tabindex="0" [attr.aria-labelledby]="'drawer-title'">
+      <ng-content></ng-content>
+    </div>
+  </mat-drawer>
+</mat-drawer-container>

@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
 import { BasicPaginatorComponent } from '../../../shared/components/basic-paginator/basic-paginator.component';
 import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
+import { DrawerComponent } from '../../../shared/components/drawer/drawer.component';
 import { User } from '../models/user.model';
 
 @Component({
@@ -29,6 +30,7 @@ import { User } from '../models/user.model';
     MatListModule,
     BasicPaginatorComponent,
     InfoCardComponent,
+    DrawerComponent,
   ],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
