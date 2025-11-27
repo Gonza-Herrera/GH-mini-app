@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/auth/login/login.routes').then(m => m.LOGIN_ROUTES),
   },
+  {
+    path: 'users',
+    loadComponent: () => import('./features/users/pages/user-list.component').then(m => m.UserListComponent)
+  },
 
 ];
 
