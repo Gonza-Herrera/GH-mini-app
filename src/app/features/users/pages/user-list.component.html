@@ -91,9 +91,11 @@
         <mat-nav-list>
           <a mat-list-item *ngFor="let p of store.lastPosts()">
             <div matListItemTitle>{{ p.title }}</div>
-            <div matListItemLine>{{ p.body }}</div>
-          </a>
-        </mat-nav-list>
+      <div matListItemLine>{{ p.body }}</div>
+    </a>
+    <div *ngIf="store.lastPostsLoading()" class="state">Cargando publicaciones...</div>
+    <div *ngIf="store.lastPostsError()" class="state state-error">{{ store.lastPostsError() }}</div>
+  </mat-nav-list>
       </div>
     </ng-container>
   </mat-drawer>

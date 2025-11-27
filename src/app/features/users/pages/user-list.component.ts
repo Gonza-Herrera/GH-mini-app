@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
 import { BasicPaginatorComponent } from '../../../shared/components/basic-paginator/basic-paginator.component';
 import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
+import { User } from '../models/user.model';
 
 @Component({
   standalone: true,
@@ -34,15 +35,14 @@ import { InfoCardComponent } from '../../../shared/components/info-card/info-car
 })
 export class UserListComponent implements OnInit {
   store: UsersStore = inject(UsersStore);
-  side: any;
 
   ngOnInit(): void {
     this.store.loadUsers();
   }
 
-  track = (_: number, u: any) => u.id;
+  track = (_: number, u: User) => u.id;
 
-  open(u: any) {
+  open(u: User) {
     this.store.openSidebar(u);
   }
 

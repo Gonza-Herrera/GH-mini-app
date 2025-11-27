@@ -19,6 +19,8 @@ export class UsersStore {
 
   selectedUser = signal<User | null>(null);
   lastPosts = signal<Post[] | null>(null);
+  lastPostsLoading = signal<boolean>(false);
+  lastPostsError = signal<string | null>(null);
 
   // derivados
   companies = computed(() => {
@@ -72,11 +74,24 @@ export class UsersStore {
 
   async openSidebar(user: User) {
     this.selectedUser.set(user);
-    this.lastPosts.set(await firstValueFrom(this.api.lastPostsByUser(user.id)));
+    this.lastPostsLoading.set(true);
+    this.lastPostsError.set(null);
+    try {
+      const posts = await firstValueFrom(this.api.lastPostsByUser(user.id));
+      this.lastPosts.set(posts);
+    } catch (err) {
+      console.error('Error cargando posts', err);
+      this.lastPostsError.set('No pudimos cargar las publicaciones.');
+      this.lastPosts.set([]);
+    } finally {
+      this.lastPostsLoading.set(false);
+    }
   }
 
   closeSidebar() {
     this.selectedUser.set(null);
     this.lastPosts.set(null);
+    this.lastPostsError.set(null);
+    this.lastPostsLoading.set(false);
   }
 }
