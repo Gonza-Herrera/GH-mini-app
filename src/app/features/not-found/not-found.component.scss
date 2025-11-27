@@ -1,0 +1,21 @@
+.not-found {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+}
+
+.not-found h1 {
+  margin: 0;
+  font-size: 64px;
+  letter-spacing: 4px;
+}
+
+.not-found mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: var(--mat-primary);
+}

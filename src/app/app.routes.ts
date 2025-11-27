@@ -20,5 +20,9 @@ export const routes: Routes = [
     canMatch: [authGuard],
     loadComponent: () => import('./features/users/pages/user-list.component').then(m => m.UserListComponent)
   },
+  {
+    path: '**',
+    loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
+  },
 
 ];
