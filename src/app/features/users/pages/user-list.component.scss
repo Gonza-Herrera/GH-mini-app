@@ -19,34 +19,8 @@
   margin: 0;
 }
 
-.grid > li {
+.grid app-info-card {
   list-style: none;
-}
-
-.card {
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 14px;
-  cursor: pointer;
-  outline: none;
-}
-
-.card p {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 6px 0;
-}
-
-.card mat-icon {
-  font-size: 18px;
-  height: 18px;
-  width: 18px;
-  line-height: 18px;
-}
-
-.card:focus {
-  box-shadow: 0 0 0 2px var(--mat-primary);
 }
 
 .paginator {

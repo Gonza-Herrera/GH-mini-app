@@ -10,6 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PageEvent } from '@angular/material/paginator';
 import { BasicPaginatorComponent } from '../../../shared/components/basic-paginator/basic-paginator.component';
+import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
 
 @Component({
   standalone: true,
@@ -26,6 +27,7 @@ import { BasicPaginatorComponent } from '../../../shared/components/basic-pagina
     MatSidenavModule,
     MatListModule,
     BasicPaginatorComponent,
+    InfoCardComponent,
   ],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],

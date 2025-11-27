@@ -23,21 +23,20 @@
     </mat-form-field>
   </header>
 
-  <ul class="grid" role="list">
-    <li
+  <div class="grid" role="list">
+    <app-info-card
       *ngFor="let u of store.paged(); trackBy: track"
-      class="card"
-      tabindex="0"
-      (click)="open(u)"
-      (keydown.enter)="open(u)"
-      aria-label="Abrir detalles de {{ u.name }}"
-    >
-      <h3>{{ u.name }}</h3>
-      <p><mat-icon aria-hidden="true">person</mat-icon> {{ u.username }}</p>
-      <p><mat-icon aria-hidden="true">email</mat-icon> {{ u.email }}</p>
-      <p><mat-icon aria-hidden="true">apartment</mat-icon> {{ u.company.name }}</p>
-    </li>
-  </ul>
+      [title]="u.name"
+      [items]="[
+        { icon: 'person', text: u.username },
+        { icon: 'email', text: u.email },
+        { icon: 'apartment', text: u.company.name }
+      ]"
+      (selected)="open(u)"
+      [ariaLabel]="'Abrir detalles de ' + u.name"
+      role="listitem"
+    ></app-info-card>
+  </div>
 
   <footer class="paginator" aria-label="Paginación">
     <app-basic-paginator
