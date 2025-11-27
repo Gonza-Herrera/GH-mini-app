@@ -2,6 +2,18 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
 
+## Demo
+
+Deploy en GitHub Pages: https://gonza-herrera.github.io/GH-mini-app/login
+
+## Deployment
+
+La app se construye con Angular CLI (build de producción) y se publica en GitHub Pages (rama `gh-pages`).
+
+## CI/CD
+
+- Workflow en `.github/workflows/deploy.yml`: se ejecuta en cada push a `master`, realiza `npm ci`, `ng build` con el `base-href` para Pages y despliega el artefacto a la rama `gh-pages` usando GitHub Actions.
+
 ## Development server
 
 To start a local development server, run:
