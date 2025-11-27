@@ -13,6 +13,8 @@ import { BasicPaginatorComponent } from '../../../shared/components/basic-pagina
 import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
 import { DrawerComponent } from '../../../shared/components/drawer/drawer.component';
 import { User } from '../models/user.model';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -37,6 +39,8 @@ import { User } from '../models/user.model';
 })
 export class UserListComponent implements OnInit {
   store: UsersStore = inject(UsersStore);
+  auth: AuthService = inject(AuthService);
+  router: Router = inject(Router);
 
   ngOnInit(): void {
     this.store.loadUsers();
@@ -46,6 +50,11 @@ export class UserListComponent implements OnInit {
 
   open(u: User) {
     this.store.openSidebar(u);
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
   onPage(event: PageEvent) {

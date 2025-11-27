@@ -23,6 +23,16 @@
         }}</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      class="logout-btn"
+      (click)="logout()"
+      aria-label="Cerrar sesión"
+    >
+      Salir
+    </button>
   </header>
 
   <div *ngIf="store.loading()" class="state">Cargando usuarios...</div>
